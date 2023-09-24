@@ -33,7 +33,7 @@ function newLocation(event) {
   let cityForm = document.querySelector("#exampleInputEmail1").value;
   let city = document.querySelector("#city");
   city.innerHTML = cityForm;
-  console.log(cityForm);
+
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityForm}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeather);
 }
@@ -43,6 +43,13 @@ function displayWeather(response) {
   let mainTemperature = document.querySelector("#mainTemperature");
   let temperature = Math.round(response.data.main.temp);
   mainTemperature.innerHTML = `${temperature}`;
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let searchButton = document.querySelector("#searchButton");
