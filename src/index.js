@@ -38,11 +38,28 @@ function newLocation(event) {
   axios.get(apiUrl).then(displayWeather);
 }
 
+function showFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let mainTemperature = document.querySelector("#mainTemperature");
+  mainTemperature.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  let mainTemperature = document.querySelector("#mainTemperature");
+  mainTemperature.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
 function displayWeather(response) {
-  console.log(response);
+  celsiusTemperature = response.data.main.temp;
   let mainTemperature = document.querySelector("#mainTemperature");
   let temperature = Math.round(response.data.main.temp);
   mainTemperature.innerHTML = `${temperature}`;
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
 
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
@@ -54,3 +71,9 @@ function displayWeather(response) {
 
 let searchButton = document.querySelector("#searchButton");
 searchButton.addEventListener("click", newLocation);
+
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", showCelsius);
