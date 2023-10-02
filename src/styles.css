@@ -11,9 +11,13 @@
 h1,
 h2,
 h4,
-p {
+p,
+.forecast {
   font-family: "Poppins", sans-serif;
   color: white;
+}
+.weekly-forecast {
+  text-align: center;
 }
 h1,
 h2 {
@@ -40,14 +44,17 @@ h2 {
   width: 20%;
 }
 
+.temperature-min {
+  opacity: 75%;
+}
+
 h4 {
   color: #75aca3;
   background-color: white;
   max-width: 150px;
 }
-p {
-  color: white;
-}
+
 footer {
-  color: #75aca3;
+  margin-top: 100px;
+  color: gray;
 }
