@@ -6,7 +6,15 @@ let date = now.getDate();
 let hours = now.getHours();
 let minutes = now.getMinutes();
 
-let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 let day = days[now.getDay()];
 
 let months = [
@@ -80,12 +88,17 @@ function getForecast(coordinates) {
 }
 
 function displayWeather(response) {
+  console.log(response.data);
   celsiusTemperature = response.data.main.temp;
   let mainTemperature = document.querySelector("#mainTemperature");
   let temperature = Math.round(response.data.main.temp);
   mainTemperature.innerHTML = `${temperature}`;
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.weather[0].main;
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
 
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
@@ -114,13 +127,6 @@ function newLocation(event) {
   axios.get(apiUrl).then(displayWeather);
 }
 
-function showFahrenheit(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let mainTemperature = document.querySelector("#mainTemperature");
-  mainTemperature.innerHTML = Math.round(fahrenheitTemperature);
-}
-
 function showCelsius(event) {
   event.preventDefault();
   let mainTemperature = document.querySelector("#mainTemperature");
@@ -131,11 +137,5 @@ let celsiusTemperature = null;
 
 let searchButton = document.querySelector("#searchButton");
 searchButton.addEventListener("click", newLocation);
-
-let fahrenheitLink = document.querySelector("#fahrenheit");
-fahrenheitLink.addEventListener("click", showFahrenheit);
-
-let celsiusLink = document.querySelector("#celsius");
-celsiusLink.addEventListener("click", showCelsius);
 
 search("Zagreb");

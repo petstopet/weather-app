@@ -46,19 +46,18 @@
 
       <div class="row main forecast">
         <div class="col-12 days">
-          <p>
-            <img src="" alt="Clear" id="icon" width="60px" />
+          <img src="" alt="Clear" id="icon" width="60px" />
 
-            <span id="mainTemperature">19</span>
-
-            <span id="units"
-              ><a href="#" id="celsius">°C</a> |
-              <a href="#" id="fahrenheit">°F</a>
-            </span>
-            <br />
-            Wind: <span id="wind"></span> km/h
-          </p>
-          <h4><strong>Wednesday</strong><br />12 Jul, 12:00</h4>
+          <div id="mainTemp">
+            <span id="mainTemperature"> </span>
+            <span id="units"> °C</span>
+          </div>
+          <div id="description"></div>
+          Humidity:
+          <span id="humidity"></span>
+          <br />
+          Wind:
+          <span id="wind"></span> km/h
 
           <div class="row weekly-forecast" id="forecast"></div>
         </div>
